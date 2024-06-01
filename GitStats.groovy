@@ -33,7 +33,7 @@ def toPinyin = { String str ->
 
 def gitLogFile = generateGitLog(sinceDate, untilDate)
 def content = gitLogFile.getText('UTF-8')
-def commitInfoList = content.findAll(/(?s)([^\r\n]+?)###([a-zA-Z_.\d\u4e00-\u9fa5- ]+)###([a-zA-Z_.\d-]+@[a-zA-Z_.\d-]+)###(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} [+]\d{4})\r?\n\s+(\d+)\s+file(?:s)? changed(?:,\s+(\d+)\s+insertion(?:s)?\([+]\))?(?:,\s+(\d+)\s+deletion(?:s)?\(-\))?\r?\n/) { _0, _1, _2, _3, _4, _5, _6, _7 ->    
+def commitInfoList = content.findAll(/(?s)([^\r\n]+?)###([a-zA-Z_.\d\u4e00-\u9fa5- ]+)###([a-zA-Z_.\d-]+@[a-zA-Z_.\d-]+)###(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} [+-]\d{4})\r?\n\s+(\d+)\s+file(?:s)? changed(?:,\s+(\d+)\s+insertion(?:s)?\([+]\))?(?:,\s+(\d+)\s+deletion(?:s)?\(-\))?\r?\n/) { _0, _1, _2, _3, _4, _5, _6, _7 ->    
     def commitInfo = new CommitInfo(
         subject: _1,
         author: toPinyin(_2),
