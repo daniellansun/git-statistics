@@ -50,7 +50,7 @@ def commitInfoList = content.findAll(/(?s)([^\r\n]+?)###([a-zA-Z_.\d\u4e00-\u9fa
 def result = GQ {
     from c in commitInfoList
     groupby c.email
-    orderby count() in desc
+    orderby count() in desc, max(c.author)
     select max(c.author) as author, c.email, count() as sumCommits, sum(c.fileChanged) as sumFilesChanged, sum(c.insertions) as sumInsertions, sum(c.deletions) as sumDeletions
 }
 
